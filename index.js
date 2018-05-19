@@ -111,7 +111,7 @@ let getAllDetailsDefault = () => {
 
 			for(x of response.Search){
 				let tempdiv =`<div class="card">    
-				<img class="card-img-top" src="${x.Poster}" alt="Card image cap">
+				<img class="card-img-top" src="${x.Poster}" alt="Image not found" onerror="this.onerror=null;this.src='noImage.jpg';">
 				<div class="card-body">
 				<h5 class="card-title">${x.Title}</h5>
 				<ul class="list-group list-group-flush">
@@ -129,7 +129,7 @@ let getAllDetailsDefault = () => {
 		}, error: (err) => {
 
 			console.log(err);
-			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${error.statusText}</div>`
+			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${err.statusText}</div>`
 			$("#main_div").append(temp1);
 
 		},
@@ -224,10 +224,11 @@ let getAllDetailsByTitle = (text) => {
 		url: 'https://www.omdbapi.com/?apikey=b8c7cc6d&s='+text,
 
 		success: (response) => {
+				console.log(response)
 
 			for(x of response.Search){
 				let tempdiv =`<div class="card">    
-				<img class="card-img-top" src="${x.Poster}" alt="Card image cap">
+				<img class="card-img-top" src="${x.Poster}" alt="Card image cap" alt="Image not found" onerror="this.onerror=null;this.src='noImage.jpg';">
 				<div class="card-body">
 				<h5 class="card-title">${x.Title}</h5>
 				<ul class="list-group list-group-flush">
@@ -245,7 +246,7 @@ let getAllDetailsByTitle = (text) => {
 		}, error: (err) => {
 
 			console.log(err);
-			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${error.statusText}</div>`
+			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${err.statusText}</div>`
 			$("#main_div").append(temp1);
 
 		},
