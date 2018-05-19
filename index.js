@@ -129,7 +129,7 @@ let getAllDetailsDefault = () => {
 		}, error: (err) => {
 
 			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${err.statusText}</div>`
-			$("#main_div").append(temp1);
+			$("#main_div1").append(temp1);
 
 		},
 		beforeSend: function(){
@@ -140,7 +140,7 @@ let getAllDetailsDefault = () => {
 			$("#progressbar").progressbar().hide();
 		},
 
-		timeout:5000
+		timeout:10000
 
 	});
 
@@ -206,7 +206,7 @@ let getAllDetailsById = (id) => {
 			$("#progressbar").progressbar().hide();
 		},
 
-		timeout:5000
+		timeout:10000
 
 
 	});
@@ -247,7 +247,7 @@ let getAllDetailsByTitle = (text) => {
 		}, error: (err) => {
 
 			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${err.statusText}</div>`
-			$("#main_div").append(temp1);
+			$("#main_div1").append(temp1);
 
 		},
 		beforeSend: function(){
@@ -258,7 +258,7 @@ let getAllDetailsByTitle = (text) => {
 			$("#progressbar").progressbar().hide();
 		},
 
-		timeout:5000
+		timeout:10000
 
 	});
 
@@ -326,7 +326,7 @@ let getAllDetailsByTitleAndYear = (text,year) => {
 			$("#progressbar").progressbar().hide();
 		},
 
-		timeout:5000
+		timeout:10000
 
 	});
 
