@@ -35,11 +35,11 @@ u {
 	text-decoration: none;
 	border-bottom: 1px solid;
 	}​
-.label{
-	margin-left: 4vh !important;
-	margin-right: 4vh !important;
-}
+	.label{
+		margin-left: 4vh !important;
+		margin-right: 4vh !important;
+	}
 
-input[type="radio"]{
-  margin: 0 9px 0 9px;
-}
+	input[type="radio"]{
+		margin: 0 9px 0 9px;
+	}

@@ -9,7 +9,6 @@ $(document).ready(() => {
 		//dropdown = $(this).html();
 		dropdown = $("#drop input[type='radio']:checked").val();
 		//$(".abc:first-child").text(dropdown);
-     //$(".abc:first-child").val(dropdown);
      if(dropdown === 'ID' || dropdown === 'Title'){
      	$('#year').css({
      		display: 'none'
@@ -128,7 +127,6 @@ let getAllDetailsDefault = () => {
 
 		}, error: (err) => {
 
-			console.log(err);
 			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${err.statusText}</div>`
 			$("#main_div").append(temp1);
 
@@ -197,7 +195,6 @@ let getAllDetailsById = (id) => {
 
 			
 		}, error: function (error) {
-			console.log(error);
 			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${error.statusText}</div>`
 			$("#main_div1").append(temp1);
 
@@ -224,28 +221,30 @@ let getAllDetailsByTitle = (text) => {
 		url: 'https://www.omdbapi.com/?apikey=b8c7cc6d&s='+text,
 
 		success: (response) => {
-				console.log(response)
+			if(response.Response=='True'){
+				for(x of response.Search){
+					let tempdiv =`<div class="card">    
+					<img class="card-img-top" src="${x.Poster}" alt="Card image cap" alt="Image not found" onerror="this.onerror=null;this.src='noImage.jpg';">
+					<div class="card-body">
+					<h5 class="card-title">${x.Title}</h5>
+					<ul class="list-group list-group-flush">
+					<li class="list-group-item">Year: ${x.Year}</li>
+					<li class="list-group-item">Type: ${x.Type}</li>
+					<li class="list-group-item">imdbID: ${x.imdbID}</li>
+					</ul>
+					</div>
+					</div>`
 
-			for(x of response.Search){
-				let tempdiv =`<div class="card">    
-				<img class="card-img-top" src="${x.Poster}" alt="Card image cap" alt="Image not found" onerror="this.onerror=null;this.src='noImage.jpg';">
-				<div class="card-body">
-				<h5 class="card-title">${x.Title}</h5>
-				<ul class="list-group list-group-flush">
-				<li class="list-group-item">Year: ${x.Year}</li>
-				<li class="list-group-item">Type: ${x.Type}</li>
-				<li class="list-group-item">imdbID: ${x.imdbID}</li>
-				</ul>
-				</div>
-				</div>`
+					$("#main_div").append(tempdiv);
 
-				$("#main_div").append(tempdiv);
-
+				}
+			}else {
+				let temp1 = `<div class="alert alert-danger"><strong>No Movie Found with Name: ${text}</div>`
+				$("#main_div1").append(temp1);
 			}
 
 		}, error: (err) => {
 
-			console.log(err);
 			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${err.statusText}</div>`
 			$("#main_div").append(temp1);
 
@@ -275,7 +274,6 @@ let getAllDetailsByTitleAndYear = (text,year) => {
 
 		success: (response) => {
 			if(response.Response=='True'){
-				console.log(response)
 				for(x of response.Ratings){
 					ratings += x.Source +' - '+ x.Value + ', '
 				}
@@ -317,7 +315,6 @@ let getAllDetailsByTitleAndYear = (text,year) => {
 
 			
 		}, error: function (error) {
-			console.log(error);
 			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${error.statusText}</div>`
 			$("#main_div1").append(temp1);
 
