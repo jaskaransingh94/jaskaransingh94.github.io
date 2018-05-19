@@ -4,97 +4,98 @@ let ratings ='';
 $(document).ready(() => {
 	value = true;
 
-
-	$("#drop").click(function(){
+//for radio button value fetch and remove now trending
+$("#drop").click(function(){
 		//dropdown = $(this).html();
 		dropdown = $("#drop input[type='radio']:checked").val();
 		//$(".abc:first-child").text(dropdown);
-     if(dropdown === 'ID' || dropdown === 'Title'){
-     	$('#year').css({
-     		display: 'none'
-     	});
-     }else{
-     	$('#year').css({
-     		display: 'flex'
-     	});
-     }
+		if(dropdown === 'ID' || dropdown === 'Title'){
+			$('#year').css({
+				display: 'none'
+			});
+		}else{
+			$('#year').css({
+				display: 'flex'
+			});
+		}
 
- });	
+	});	
 
-	$("#search").click(function(){
+// search operation
+$("#search").click(function(){
 
-		if(dropdown === 'ID'){
-			text = $('#txtSearch').val();
-			if($.trim(text)!==''){
-				$( "#main_div1" ).empty();
-				$( "#main_div" ).empty();
-				$( "#default" ).empty();
-				setTimeout(getAllDetailsById(text), 1000);
-			}
-			else{
-				$( "#txtSearch").effect('shake', 400);
+	if(dropdown === 'ID'){
+		text = $('#txtSearch').val();
+		if($.trim(text)!==''){
+			$( "#main_div1" ).empty();
+			$( "#main_div" ).empty();
+			$( "#default" ).empty();
+			setTimeout(getAllDetailsById(text), 1000);
+		}
+		else{
+			$( "#txtSearch").effect('shake', 400);
 
+		}	
+	}else if(dropdown === 'Title'){
+		text = $('#txtSearch').val();
+		if($.trim(text)!==''){
+			$( "#main_div1" ).empty();
+			$( "#main_div" ).empty();
+			$( "#default" ).empty();
+			setTimeout(getAllDetailsByTitle(text), 1000);
+		}
+		else{
+			$( "#txtSearch").effect('shake', 400);
+
+		}	
+	}else if(dropdown === 'Title And Year'){
+		text = $('#txtSearch').val();
+		year = $('#year').val();
+		if($.trim(text)!=='' && $.trim(year)!==''){
+			$( "#main_div1" ).empty();
+			$( "#main_div" ).empty();
+			$( "#default" ).empty();
+			setTimeout(getAllDetailsByTitleAndYear(text,year), 1000);
+		}
+		else{
+			if($.trim(text)==''){
+				$( "#txtSearch").effect('shake', 400);}
+				else if($.trim(year)==''){
+					$( "#year").effect('shake', 400);
+				}
 			}	
-		}else if(dropdown === 'Title'){
-			text = $('#txtSearch').val();
-			if($.trim(text)!==''){
-				$( "#main_div1" ).empty();
-				$( "#main_div" ).empty();
-				$( "#default" ).empty();
-				setTimeout(getAllDetailsByTitle(text), 1000);
-			}
-			else{
-				$( "#txtSearch").effect('shake', 400);
-
-			}	
-		}else if(dropdown === 'Title And Year'){
-			text = $('#txtSearch').val();
-			year = $('#year').val();
-			if($.trim(text)!=='' && $.trim(year)!==''){
-				$( "#main_div1" ).empty();
-				$( "#main_div" ).empty();
-				$( "#default" ).empty();
-				setTimeout(getAllDetailsByTitleAndYear(text,year), 1000);
-			}
-			else{
-				if($.trim(text)==''){
-					$( "#txtSearch").effect('shake', 400);}
-					else if($.trim(year)==''){
-						$( "#year").effect('shake', 400);
-					}
-				}	
-			}else{
+		}else{
 			//$( ".abc").addClass('text-danger')	
 			$( ".abc").effect('shake', 400);	
 		}
 
 	});
 
+// new screen show now trending
+if($('#txtSearch').val().length === 0 && value == true){
+	setTimeout(getAllDetailsDefault, 1000);
+}
 
-	if($('#txtSearch').val().length === 0 && value == true){
-		setTimeout(getAllDetailsDefault, 1000);
-	}
-	
+// datepricker for year
+$(function() {
+	$("#year").datepicker({
+		changeYear:true,
+		changeMonth: false,
+		showButtonPanel: true,
+		yearRange: '1950:2018',
+		dateFormat: 'yy',
+		onClose: function(dateText, inst) { 
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, 0, 1));
+		}});
 
-	$(function() {
-		$("#year").datepicker({
-			changeYear:true,
-			changeMonth: false,
-			showButtonPanel: true,
-			yearRange: '1950:2018',
-			dateFormat: 'yy',
-			onClose: function(dateText, inst) { 
-				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-				$(this).datepicker('setDate', new Date(year, 0, 1));
-			}});
+});
+// initialize progress bar
+$("#progressbar").progressbar({
+	value: false
+});
 
-	});
 
-	$("#progressbar").progressbar({
-		value: false
-	});
-
-	
 });
 
 
