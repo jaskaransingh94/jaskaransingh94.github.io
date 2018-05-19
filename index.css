@@ -1,8 +1,4 @@
-/* .card1 {
-	height: 20vh;
-	width: 10vw;   
-}
- */
+
 a{
 	cursor: pointer;
 }
@@ -39,14 +35,11 @@ u {
 	text-decoration: none;
 	border-bottom: 1px solid;
 	}​
+.label{
+	margin-left: 4vh !important;
+	margin-right: 4vh !important;
+}
 
-.text-danger {
-    color: #a94442;
-    position: absolute;
-    width: 100%;
-    top: 34px;
-    line-height: 34px;
-    left: 0px;
-
-
+input[type="radio"]{
+  margin: 0 9px 0 9px;
 }

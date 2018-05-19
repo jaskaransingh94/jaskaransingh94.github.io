@@ -1,41 +1,16 @@
-/*{"Title":"The Avengers",
-"Year":"2012",
-"Rated":"PG-13",
-"Released":"04 May 2012",
-"Runtime":"143 min",
-"Genre":"Action, Adventure, Sci-Fi",
-"Director":"Joss Whedon",
-"Writer":"Joss Whedon (screenplay), Zak Penn (story), Joss Whedon (story)",
-"Actors":"Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
-"Plot":"Nick Fury is the director of S.H.I.E.L.D., an international peace-keeping agency.The agency is a who's who of Marvel Super Heroes, with Iron Man, The Incredible Hulk, Thor, Captain America,Hawkeye and Black Widow. When global security is threatened by Loki and his cohorts, Nick Fury and his team will need all their powers to save the world from disaster.",
-"Language":"English, Russian, Hindi",
-"Country":"USA",
-"Awards":"Nominated for 1 Oscar. Another 38 wins & 79 nominations.",
-"Poster":"https://ia.media-imdb.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg",
-"Ratings":[{"Source":"Internet Movie Database","Value":"8.1/10"},
-{"Source":"Rotten Tomatoes","Value":"92%"},
-{"Source":"Metacritic","Value":"69/100"}],
-"Metascore":"69",
-"imdbRating":"8.1",
-"imdbVotes":"1,100,592",
-"imdbID":"tt0848228",
-"Type":"movie",
-"DVD":"25 Sep 2012",
-"BoxOffice":"$623,279,547",
-"Production":"Walt Disney Pictures",
-"Website":"http://marvel.com/avengers_movie",/
-"Response":"True"} use effect and progress bar*/
 let value = false;
 let text,year,dropdown;
 let ratings ='';
 $(document).ready(() => {
 	value = true;
 
-	$("#drop a").click(function(){
-		dropdown = $(this).html();
-		$(".abc:first-child").text(dropdown);
+
+	$("#drop").click(function(){
+		//dropdown = $(this).html();
+		dropdown = $("#drop input[type='radio']:checked").val();
+		//$(".abc:first-child").text(dropdown);
      //$(".abc:first-child").val(dropdown);
-     if(dropdown === 'ID'){
+     if(dropdown === 'ID' || dropdown === 'Title'){
      	$('#year').css({
      		display: 'none'
      	});
@@ -58,7 +33,18 @@ $(document).ready(() => {
 				setTimeout(getAllDetailsById(text), 1000);
 			}
 			else{
-				$( "#year").addClass('text-danger')
+				$( "#txtSearch").effect('shake', 400);
+
+			}	
+		}else if(dropdown === 'Title'){
+			text = $('#txtSearch').val();
+			if($.trim(text)!==''){
+				$( "#main_div1" ).empty();
+				$( "#main_div" ).empty();
+				$( "#default" ).empty();
+				setTimeout(getAllDetailsByTitle(text), 1000);
+			}
+			else{
 				$( "#txtSearch").effect('shake', 400);
 
 			}	
@@ -124,7 +110,6 @@ let getAllDetailsDefault = () => {
 		success: (response) => {
 
 			for(x of response.Search){
-				console.log(x) 
 				let tempdiv =`<div class="card">    
 				<img class="card-img-top" src="${x.Poster}" alt="Card image cap">
 				<div class="card-body">
@@ -227,6 +212,55 @@ let getAllDetailsById = (id) => {
 
 
 	});
+
+}
+
+let getAllDetailsByTitle = (text) => {
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		async: true,
+		url: 'https://www.omdbapi.com/?apikey=b8c7cc6d&s='+text,
+
+		success: (response) => {
+
+			for(x of response.Search){
+				let tempdiv =`<div class="card">    
+				<img class="card-img-top" src="${x.Poster}" alt="Card image cap">
+				<div class="card-body">
+				<h5 class="card-title">${x.Title}</h5>
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item">Year: ${x.Year}</li>
+				<li class="list-group-item">Type: ${x.Type}</li>
+				<li class="list-group-item">imdbID: ${x.imdbID}</li>
+				</ul>
+				</div>
+				</div>`
+
+				$("#main_div").append(tempdiv);
+
+			}
+
+		}, error: (err) => {
+
+			console.log(err);
+			let temp1 = `<div class="alert alert-danger"><strong>Error Due To: ${error.statusText}</div>`
+			$("#main_div").append(temp1);
+
+		},
+		beforeSend: function(){
+			$("#progressbar").progressbar();
+			//setTimeout(3000)
+		},
+		complete: function(){
+			$("#progressbar").progressbar().hide();
+		},
+
+		timeout:5000
+
+	});
+
 
 }
 

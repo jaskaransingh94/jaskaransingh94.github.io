@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding: 1vh">
-		<div class="col-lg-10 col-xl-10" style="margin: 0 auto">
+		<div class="col-lg-10" style="margin: 0 auto">
 
 			<form style="padding: 1vh"> 
 				<div class="input-group mb-3">
@@ -29,42 +29,47 @@
 						</button>
 					</div> -->
 
-					<div class="dropdown show">
+				</div>
+				<div class="input-group abc"  id="drop" >Search By:        
+					<label class="radio text-muted"><input type="radio" name="optradio" value="ID">ID</label>
+					<label class="radio text-muted"><input type="radio" name="optradio" value="Title And Year">Title And Year</label>
+					<label class="radio text-muted"><input type="radio" name="optradio" value="Title">Title</label>
+				</div>
+					<!-- <div class="dropdown show" style="margin: 0 auto">
 						<a class="btn btn-primary dropdown-toggle abc" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 7vh;margin-left: 2vh">
 							Search By
 						</a>
-
+					
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="drop" style="margin-top: 1.5vh">
 							<a class="dropdown-item">ID</a>
 							<a class="dropdown-item">Title And Year</a>
 						</div>
-					</div>
+					</div> -->
+
+				</form>
+			</div>
+			<div id = "default" >
+				<h1 class="text-center display-4 text-uppercase" style="padding: 2vh;color: #566573"><u>Now Trending</	u></h1>
+				</div>
+				<div id="main_div1"></div>
+				<div id="progressbar"></div>
+				<div class="card-columns" id="main_div">
 				</div>
 
-			</form>
-		</div>
-		<div id = "default" >
-			<h1 class="text-center display-4 text-uppercase" style="padding: 2vh;color: #566573"><u>Now Trending</	u></h1>
-			</div>
-			<div id="main_div1"></div>
-			<div id="progressbar"></div>
-			<div class="card-columns" id="main_div">
+
 			</div>
 
 
-		</div>
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+			<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+			<script type="text/javascript" src="index.js"></script>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
-
-		<script type="text/javascript" src="index.js"></script>
-
-	</body>
-	</html>
+		</body>
+		</html>
